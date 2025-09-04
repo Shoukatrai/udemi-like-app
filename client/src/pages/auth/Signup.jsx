@@ -25,14 +25,14 @@ const Signup = () => {
       role: "",
     },
   });
+
   const onSubmit = async (data) => {
-    console.log("Form data:", data);
     try {
       setLoading(true);
       const api = `${BASE_URL}${apiEndPoints.signup}`;
       const response = await axios.post(api, data);
-      console.log("response", response);
       setLoading(false);
+
       toastAlert({
         type: "success",
         message: response.data.message || "Signup Successful!",
@@ -40,7 +40,6 @@ const Signup = () => {
       navigate("/login");
     } catch (error) {
       setLoading(false);
-      console.log(error.message);
       toastAlert({
         type: "error",
         message: error.message || "Something went wrong!",
@@ -52,7 +51,10 @@ const Signup = () => {
     <Stack
       alignItems="center"
       justifyContent="center"
-      sx={{ minHeight: "100vh" }}
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "var(--color-bg)",
+      }}
     >
       <Box
         component="form"
@@ -63,11 +65,16 @@ const Signup = () => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          boxShadow: 3,
           borderRadius: 3,
+          backgroundColor: "var(--color-surface)",
+          boxShadow: "0px 4px 20px rgba(0,0,0,0.6)",
         }}
       >
-        <Typography variant="h5" textAlign="center">
+        <Typography
+          variant="h5"
+          textAlign="center"
+          sx={{ color: "var(--color-primary)", fontWeight: 700 }}
+        >
           Sign Up
         </Typography>
 
@@ -75,7 +82,16 @@ const Signup = () => {
           control={control}
           name="name"
           render={({ field }) => (
-            <TextField variant="outlined" label="Name" fullWidth {...field} />
+            <TextField
+              variant="outlined"
+              label="Name"
+              fullWidth
+              {...field}
+              InputLabelProps={{
+                style: { color: "var(--color-text-secondary)" },
+              }}
+              InputProps={{ style: { color: "var(--color-text-primary)" } }}
+            />
           )}
         />
 
@@ -83,7 +99,16 @@ const Signup = () => {
           control={control}
           name="email"
           render={({ field }) => (
-            <TextField variant="outlined" label="Email" {...field} fullWidth />
+            <TextField
+              variant="outlined"
+              label="Email"
+              fullWidth
+              {...field}
+              InputLabelProps={{
+                style: { color: "var(--color-text-secondary)" },
+              }}
+              InputProps={{ style: { color: "var(--color-text-primary)" } }}
+            />
           )}
         />
 
@@ -97,14 +122,28 @@ const Signup = () => {
               type="password"
               fullWidth
               {...field}
+              InputLabelProps={{
+                style: { color: "var(--color-text-secondary)" },
+              }}
+              InputProps={{ style: { color: "var(--color-text-primary)" } }}
             />
           )}
         />
+
         <Controller
           control={control}
           name="role"
           render={({ field }) => (
-            <TextField select label="Role" fullWidth {...field}>
+            <TextField
+              select
+              label="Role"
+              fullWidth
+              {...field}
+              InputLabelProps={{
+                style: { color: "var(--color-text-secondary)" },
+              }}
+              InputProps={{ style: { color: "var(--color-text-primary)" } }}
+            >
               {roles.map((role) => (
                 <MenuItem key={role} value={role}>
                   {role}
@@ -114,8 +153,21 @@ const Signup = () => {
           )}
         />
 
-        <Button variant="contained" type="submit" fullWidth>
-          {loading ? "signing up" : "Sign Up"}
+        <Button
+          variant="contained"
+          type="submit"
+          fullWidth
+          disabled={loading}
+          sx={{
+            backgroundColor: "var(--color-primary)",
+            "&:hover": {
+              backgroundColor: "#e65100", // darker orange
+            },
+            fontWeight: "bold",
+            borderRadius: "8px",
+          }}
+        >
+          {loading ? "Signing Up..." : "Sign Up"}
         </Button>
 
         <Typography
@@ -123,13 +175,15 @@ const Signup = () => {
             display: "flex",
             gap: "5px",
             justifyContent: "center",
+            color: "var(--color-text-secondary)",
           }}
         >
-          Have an Account
+          Have an Account?
           <Link
             style={{
-              color: "blue",
+              color: "var(--color-secondary)",
               textDecoration: "none",
+              fontWeight: 600,
             }}
             to={"/login"}
           >

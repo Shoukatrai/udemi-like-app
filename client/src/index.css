@@ -1,0 +1,78 @@
+/* index.css */
+:root {
+  --color-primary: #ff6f00; /* Deep Orange */
+  --color-secondary: #00acc1; /* Teal */
+  --color-bg: #121212;
+  --color-surface: #1e1e1e;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b0b0b0;
+  --color-success: #43a047;
+}
+
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: "Inter", "Roboto", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+/* Links */
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+button.primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+button.primary:hover {
+  background-color: #c62828;
+}
+
+button.secondary {
+  background-color: var(--color-secondary);
+  color: #121212;
+}
+button.secondary:hover {
+  background-color: #ffa000;
+}
+
+/* Card Style */
+.card {
+  background-color: var(--color-surface);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin: 10px 0;
+}

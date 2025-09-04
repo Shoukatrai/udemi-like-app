@@ -1,9 +1,11 @@
 import express from "express";
 import {
+  cancelEnrollmentCourse,
   createCourse,
   deleteCourse,
   enrollCourse,
   getAllCourse,
+  getAllEnrolledCourse,
   updateCourse,
 } from "../controllers/course.js";
 import {
@@ -19,8 +21,8 @@ router.post("/create", instructorCheck, upload.single("video"), createCourse);
 router.put("/update/:id", instructorCheck, updateCourse);
 router.delete("/delete/:id", instructorCheck, deleteCourse);
 router.put("/enroll/:id", studentAuth, enrollCourse);
-router.get("/", authCheck, getAllCourse);
-
-// router.post("/login", login);
+router.put("/cancel-enroll/:id", studentAuth, cancelEnrollmentCourse);
+router.get("/", getAllCourse);
+router.get("/enrolled", studentAuth, getAllEnrolledCourse);
 
 export default router;

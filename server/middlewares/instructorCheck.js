@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 export const instructorCheck = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req?.headers?.authorization?.split(" ")[1];
     if (!token) {
       return res.status(400).json({
         message: "Token is missing!",
@@ -35,7 +35,7 @@ export const instructorCheck = async (req, res, next) => {
 
 export const studentAuth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req?.headers?.authorization?.split(" ")[1];
     if (!token) {
       return res.status(400).json({
         message: "Token is missing!",
@@ -68,7 +68,7 @@ export const studentAuth = async (req, res, next) => {
 
 export const authCheck = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req?.headers?.authorization?.split(" ")[1];
     if (!token) {
       return res.status(400).json({
         message: "Token is missing!",

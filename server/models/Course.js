@@ -5,6 +5,10 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  category: {
+    type : String,
+    required : true
+  },
   desc: {
     type: String,
   },

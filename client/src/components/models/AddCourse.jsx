@@ -25,17 +25,20 @@ export default function AddCourse({ open, setOpen, handleClose, setRefresh }) {
       title: "",
       desc: "",
       video: "",
+      category: "",
     },
   });
 
   const onSubmit = async (data) => {
     try {
-      console.log(data)
+      console.log(data);
       setLoading(true);
 
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("desc", data.desc);
+      formData.append("category", data.category);
+
       if (data.video) {
         formData.append("video", data.video);
       }
@@ -122,6 +125,19 @@ export default function AddCourse({ open, setOpen, handleClose, setRefresh }) {
                 variant="outlined"
                 multiline
                 rows={2}
+                {...field}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="category"
+            render={({ field }) => (
+              <TextField
+                label="Course Category"
+                fullWidth
+                variant="outlined"
+                multiline
                 {...field}
               />
             )}

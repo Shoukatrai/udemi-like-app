@@ -3,16 +3,32 @@ import { Route, Routes } from "react-router-dom";
 import { Home, Login, Signup } from "./pages";
 import { Bounce, ToastContainer } from "react-toastify";
 import Courses from "./pages/instructor/Courses";
+import AuthRoute from "./routes/AuthRoute";
+import Intructor from "./routes/Intructor";
+import Student from "./routes/Student";
+import EnrolledCourses from "./pages/student/EnrolledCourses";
 
 const App = () => {
   return (
     <>
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/courses" element={<Courses />} />
+        {/* AUTH ROUTE */}
+        <Route element={<AuthRoute />}>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+        {/* INSTRUCTOR */}
+        <Route element={<Intructor />}>
+          {/* <Route path="/instrucor-dash" element={<Home />} /> */}
+          <Route path="/courses" element={<Courses />} />
+        </Route>
 
+        {/* STUDENT */}
+        <Route element={<Student />}>
+          <Route path="/enrolled-courses" element={<EnrolledCourses />} />
+        </Route>
+        {/* ADMIN */}
       </Routes>
       <ToastContainer
         position="top-right"
