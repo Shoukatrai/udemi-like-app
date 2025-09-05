@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userScehema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -13,10 +13,25 @@ const userScehema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role : {
-    type : String,
-    enum : ["student", "instructor" , "admin"]
+  role: {
+    type: String,
+    enum: ["student", "instructor", "admin"],
+    default: "student",
   },
+  coursesTeaching: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+      default: [],
+    },
+  ],
+  coursesEnrolled: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
+      default: [],
+    },
+  ],
 });
 
-export default mongoose.model("User" , userScehema)
+export default mongoose.model("User", userSchema);

@@ -31,7 +31,14 @@ const Login = () => {
         type: "success",
         message: response.data.message || "Login Successful!",
       });
-      navigate("/");
+      const role = response.data.data.role;
+      if (role === "student") {
+        return navigate("/");
+      } else if (role === "instructor") {
+        return navigate("/instrucor-dash");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       setLoading(false);
       toastAlert({

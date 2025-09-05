@@ -24,6 +24,8 @@ export const createCourse = async (req, res) => {
     };
     const { title, desc, category } = req.body;
     const instructor = req.user;
+    console.log("instructor", instructor);
+
     let videoUrl = "";
     if (req.file) {
       console.log("video started");
@@ -34,23 +36,32 @@ export const createCourse = async (req, res) => {
     }
 
     console.log("videoUrl", videoUrl);
-    const obj = {
+
+    const courseObj = {
       title,
       desc,
       category,
       instructor,
       video: videoUrl,
-      students: [],
     };
-    console.log("obj", obj);
-    const course = await Course.create(obj);
+    console.log("courseObj", courseObj);
+    if (!videoUrl) {
+      return res.status(200).json({
+        message: "Video Not Uploaded!",
+        data: null,
+        status: false,
+      });
+    }
+    const course = await Course.create(courseObj);
     console.log("course", course);
+    await User.findByIdAndUpdate(instructor, {
+      $push: { coursesTeaching: course._id },
+    });
     res.status(200).json({
       message: "Course Uploaded!",
       data: course,
       status: true,
     });
-    console.log("obj", obj);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({
@@ -174,6 +185,9 @@ export const enrollCourse = async (req, res) => {
       });
     }
     await response.students.push(studentId);
+    await User.findByIdAndUpdate(studentId, {
+      $push: { coursesEnrolled: courseId },
+    });
     await response.save();
     res.status(200).json({
       message: "Enrolled Successfully!",

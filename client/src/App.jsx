@@ -7,6 +7,7 @@ import AuthRoute from "./routes/AuthRoute";
 import Intructor from "./routes/Intructor";
 import Student from "./routes/Student";
 import EnrolledCourses from "./pages/student/EnrolledCourses";
+import Dashboard from "./pages/instructor/Dashboard";
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
         </Route>
         {/* INSTRUCTOR */}
         <Route element={<Intructor />}>
-          {/* <Route path="/instrucor-dash" element={<Home />} /> */}
+          <Route path="/instrucor-dash" element={<Dashboard />} />
           <Route path="/courses" element={<Courses />} />
         </Route>
 

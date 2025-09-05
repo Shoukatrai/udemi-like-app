@@ -6,15 +6,15 @@ const courseSchema = new mongoose.Schema({
     required: true,
   },
   category: {
-    type : String,
-    required : true
+    type: String,
+    required: true,
   },
   desc: {
     type: String,
   },
   instructor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", 
+    ref: "User",
     required: true,
   },
   video: {
@@ -24,7 +24,8 @@ const courseSchema = new mongoose.Schema({
   students: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", 
+      ref: "User",
+      default: [],
     },
   ],
 });
